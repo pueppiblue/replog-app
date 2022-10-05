@@ -1,7 +1,7 @@
 # hint: use https://www.fromlatest.io/ for smaller image sizes
 
 FROM composer:2 as composer
-FROM php:8.1-apache
+FROM php:7.4-apache
 
 ARG APP_ENVIRONMENT=prod
 ARG HOST_UID=1000
