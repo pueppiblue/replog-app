@@ -1,0 +1,10 @@
+export DB_PASSWORD=12345678replog
+export APP_HTTP_PROXY=
+export DB_USER=replog
+export APP_DEBUG=1
+export APP_ENVIRONMENT=dev
+export VIRTUAL_HOST=replog.local
+export JWT_PASSPHRASE=ChangeMe
+export DB_NAME=replog
+export MAILER_DSN=null://null
+export APP_SECRET=tosecretforyou:P
