@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Form\Type\RepLogType;
 use App\Repository\RepLogRepository;
 use App\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

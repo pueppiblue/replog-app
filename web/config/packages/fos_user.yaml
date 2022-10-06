@@ -8,3 +8,5 @@ fos_user:
     from_email:
         address: 'ryan@pumpup.example.com'
         sender_name: Ryan
+    service:
+        mailer: fos_user.mailer.noop
