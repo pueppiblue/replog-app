@@ -50,7 +50,8 @@
         "symfony/stopwatch": "^3.3|^4.0",
         "symfony/var-dumper": "^3.3|^4.0",
         "symfony/web-profiler-bundle": "^3.3|^4.0",
-        "symfony/web-server-bundle": "^4.0"
+        "symfony/web-server-bundle": "^4.0",
+        "symfony/webpack-encore-bundle": "^1.15"
     },
     "config": {
         "preferred-install": {
