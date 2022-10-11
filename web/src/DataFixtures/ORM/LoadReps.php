@@ -17,6 +17,7 @@ class LoadReps extends Fixture
         $items = array_flip(RepLog::getThingsYouCanLiftChoices());
 
         $names = array(
+            array('nils', 'freigang'),
             array('Brad', 'Kitt'),
             array('Cat', 'Middleton'),
             array('Cindy', 'Clawford'),

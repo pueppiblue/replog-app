@@ -5,6 +5,7 @@
     "bootstrap": "3",
     "copy-webpack-plugin": "^4.4.1",
     "eslint": "^8.25.0",
+    "eslint-plugin-react": "^7.31.9",
     "font-awesome": "4",
     "jquery": "^3.3.1",
     "node-sass": "^6.0",

@@ -34,7 +34,7 @@ Encore
     //     config.useBuiltIns = 'usage';
     //     config.corejs = 3;
     // })
-    // .enableReactPreset()
+    .enableReactPreset()
 
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
@@ -49,6 +49,9 @@ Encore
             }
         }
         options.allowedHosts = 'all';
+        options.client= {
+            webSocketURL: 'wss://replog.local:8112/ws'
+        }
     })
 ;
 
