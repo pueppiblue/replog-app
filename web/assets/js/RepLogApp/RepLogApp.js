@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import RepLogs from "./RepLogs";
 import PropTypes from "prop-types";
+import {v4 as uuid} from 'uuid';
 
 export default class RepLogApp extends Component {
     constructor(props) {
@@ -8,9 +9,9 @@ export default class RepLogApp extends Component {
         this.state = {
             highlightedRowId: null,
             repLogs: [
-                {id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
-                {id: 2, reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
-                {id: 8, reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
+                {id: uuid(), reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
+                {id: uuid(), reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
+                {id: uuid(), reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
             ]
         };
     }
@@ -23,7 +24,7 @@ export default class RepLogApp extends Component {
 
     _handleNewItemSubmit(itemName, reps) {
         const newItem = {
-            id: 'todo uuid',
+            id: uuid(),
             reps: parseFloat(reps),
             itemLabel: itemName,
             totalWeightLifted: Math.floor(Math.random() * 50)

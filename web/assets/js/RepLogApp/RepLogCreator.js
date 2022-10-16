@@ -20,6 +20,9 @@ export default class RepLogCreator extends Component {
         const itemName = itemSelect.options[itemSelect.selectedIndex].text;
 
         newItemSubmitHandler(itemName, reps);
+
+        quantityInput.value = '';
+        itemSelect.selectedIndex = 0;
     }
 
 
