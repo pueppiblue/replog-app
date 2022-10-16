@@ -1,5 +1,4 @@
-var Encore = require('@symfony/webpack-encore');
-const fs = require('fs');
+let Encore = require('@symfony/webpack-encore');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -25,10 +24,16 @@ Encore
         {from: './assets/static', to: 'static'}
     ]))
 
-    // .configureBabel((config) => {
-    //     config.plugins.push('@babel/plugin-proposal-class-properties');
-    // })
-    //
+
+    .configureBabel((babelConfig) => {
+        if (Encore.isProduction()) {
+            babelConfig.plugins.push(
+                'transform-react-remove-prop-types'
+            );
+        }
+        babelConfig.plugins.push('@babel/plugin-proposal-class-properties');
+    })
+
     // enables @babel/preset-env polyfills
     // .configureBabelPresetEnv((config) => {
     //     config.useBuiltIns = 'usage';
