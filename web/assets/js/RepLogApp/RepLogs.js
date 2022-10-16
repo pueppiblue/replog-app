@@ -3,7 +3,15 @@ import RepLogList from "./RepLogList";
 import PropTypes from "prop-types";
 
 export default function RepLogs(props) {
-    const {withHeart, highlightedRowId, rowClickedHandler, repLogs} = props;
+    const {withHeart, highlightedRowId, rowClickedHandler, newItemSubmitHandler, repLogs} = props;
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const itemName = event.target.elements.namedItem('rep_log_item').value;
+        const reps = event.target.elements.namedItem('rep_log_reps').value;
+
+        newItemSubmitHandler(itemName, reps);
+    }
 
     return (
         <div className="col-md-7 js-rep-log-table">
@@ -19,7 +27,11 @@ export default function RepLogs(props) {
                 repLogs={repLogs}
             />
 
-            <form className="form-inline" style={{display: "flex", justifyContent: "space-between"}}>
+            <form
+                className="form-inline"
+                style={{display: "flex", justifyContent: "space-between"}}
+                onSubmit={handleFormSubmit}
+            >
                 <div className="form-group">
                     <label className="sr-only control-label required" htmlFor="rep_log_item">
                         What did you lift?
@@ -59,5 +71,6 @@ RepLogs.propTypes = {
     withHeart: PropTypes.bool,
     highlightedRowId: PropTypes.any,
     rowClickedHandler: PropTypes.func.isRequired,
+    newItemSubmitHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

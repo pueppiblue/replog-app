@@ -21,17 +21,24 @@ export default class RepLogApp extends Component {
         });
     }
 
+    _handleNewItemSubmit(itemName, reps) {
+        console.log(`new item ${itemName} with ${reps} reps submitted.`);
+        // todo handle state update
+    }
+
     render() {
         return (
             <RepLogs
                 {...this.props}
                 {...this.state}
                 rowClickedHandler={this._handleRowClick.bind(this)}
+                newItemSubmitHandler={this._handleNewItemSubmit.bind(this)}
             />
         );
     }
 }
 
-RepLogApp.propTypes = {
+RepLogApp
+    .propTypes = {
     withHeart: PropTypes.bool,
 }
