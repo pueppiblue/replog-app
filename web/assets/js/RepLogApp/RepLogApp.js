@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
+import RepLogList from "./RepLogList";
 
-const repLogs = [
-    {id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
-    {id: 2, reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
-    {id: 8, reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
-];
 
 export default class RepLogApp extends Component {
     constructor(props) {
@@ -14,7 +10,7 @@ export default class RepLogApp extends Component {
         };
     }
 
-    _handleRowClick(clickedRowId, event) {
+    _handleRowClick(clickedRowId) {
         this.setState({
             highlightedRowId: clickedRowId,
         });
@@ -32,40 +28,11 @@ export default class RepLogApp extends Component {
                     !
                 </h2>
 
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>What</th>
-                        <th>How many times?</th>
-                        <th>Weight</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        repLogs.map((replog) =>
-                            (
-                                <tr
-                                    key={replog.id}
-                                    className={replog.id === highlightedRowId ? 'info' : ''}
-                                    onClick={(event) => this._handleRowClick(replog.id, event)}
-                                >
-                                    <td>{replog.itemLabel}</td>
-                                    <td>{replog.reps}</td>
-                                    <td>{replog.totalWeightLifted}</td>
-                                    <td>...</td>
-                                </tr>
-                            ))
-                    }
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <th>TODO total</th>
-                        <td>&nbsp;</td>
-                    </tr>
-                    </tfoot>
-                </table>
+                <RepLogList
+                    highlightedRowId={highlightedRowId}
+                    rowClickedHandler={this._handleRowClick.bind(this)}
+                />
+
                 <form className="form-inline" style={{display: "flex", justifyContent: "space-between"}}>
                     <div className="form-group">
                         <label className="sr-only control-label required" htmlFor="rep_log_item">
