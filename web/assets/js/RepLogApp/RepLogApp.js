@@ -6,17 +6,6 @@ const repLogs = [
     {id: 8, reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
 ];
 
-const repLogElements = repLogs.map((replog) => {
-    return (
-        <tr>
-            <td>{replog.itemLabel}</td>
-            <td>{replog.reps}</td>
-            <td>{replog.totalWeightLifted}</td>
-            <td>...</td>
-        </tr>
-    )
-});
-
 export default class RepLogApp extends Component {
     render() {
         let heart = this.props.withHeart ? <span>❤</span> : '';
@@ -45,7 +34,17 @@ export default class RepLogApp extends Component {
                         <td>180</td>
                         <td>...</td>
                     </tr>
-                    {repLogElements}
+                    {
+                        repLogs.map((replog) =>
+                            (
+                                <tr key={replog.id}>
+                                    <td>{replog.itemLabel}</td>
+                                    <td>{replog.reps}</td>
+                                    <td>{replog.totalWeightLifted}</td>
+                                    <td>...</td>
+                                </tr>
+                            ))
+                    }
                     </tbody>
                     <tfoot>
                     <tr>
