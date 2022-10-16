@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 const repLogs = [
     {id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
@@ -45,4 +46,9 @@ export default function RepLogList(props) {
             </tfoot>
         </table>
     );
+}
+
+RepLogList.propTypes = {
+    highlightedRowId: PropTypes.any,
+    rowClickedHandler: PropTypes.func.isRequired,
 }
