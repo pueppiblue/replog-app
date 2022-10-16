@@ -5,6 +5,11 @@ import RepLogApp from "./RepLogApp/RepLogApp";
 const container = document.getElementById('replog-app');
 const root = createRoot(container);
 
-console.log(<RepLogApp />);
+const showHeart = true;
 
-root.render(<RepLogApp />);
+
+root.render(
+    <RepLogApp
+        withHeart={showHeart}
+    />
+);
