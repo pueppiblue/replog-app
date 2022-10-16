@@ -7,14 +7,22 @@ const repLogs = [
 ];
 
 export default class RepLogApp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            highlightedRowId: null,
+        };
+    }
+
     render() {
-        let heart = this.props.withHeart ? <span>❤</span> : '';
+        const {withHeart} = this.props;
+        const {highlightedRowId} = this.state;
 
         return (
             <div className="col-md-7 js-rep-log-table">
                 <h2>
                     Lift History
-                    {heart}
+                    {withHeart}
                     !
                 </h2>
 
@@ -31,7 +39,10 @@ export default class RepLogApp extends Component {
                     {
                         repLogs.map((replog) =>
                             (
-                                <tr key={replog.id}>
+                                <tr
+                                    key={replog.id}
+                                    className={replog.id === highlightedRowId ? 'info' : ''}
+                                >
                                     <td>{replog.itemLabel}</td>
                                     <td>{replog.reps}</td>
                                     <td>{replog.totalWeightLifted}</td>
