@@ -1,6 +1,16 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
+const calculateTotalReps = replogs => replogs.reduce(
+    (total, replogItem) => total + replogItem.reps,
+    0
+)
+
+const calculateTotalWeight = replogs => replogs.reduce(
+    (total, replogItem) => total + replogItem.totalWeightLifted,
+    0
+)
+
 export default function RepLogList(props) {
     const {highlightedRowId, rowClickedHandler, repLogs} = props;
 
@@ -34,8 +44,8 @@ export default function RepLogList(props) {
             <tfoot>
             <tr>
                 <td>&nbsp;</td>
-                <th>TODO total</th>
-                <td>&nbsp;</td>
+                <th>{calculateTotalReps(repLogs)}</th>
+                <td>{calculateTotalWeight(repLogs)}</td>
             </tr>
             </tfoot>
         </table>
