@@ -22,8 +22,14 @@ export default class RepLogApp extends Component {
     }
 
     _handleNewItemSubmit(itemName, reps) {
-        console.log(`new item ${itemName} with ${reps} reps submitted.`);
-        // todo handle state update
+        const newItem = {
+            id: 'todo uuid',
+            reps: parseFloat(reps),
+            itemLabel: itemName,
+            totalWeightLifted: Math.floor(Math.random() * 50)
+        };
+
+        this.setState({repLogs: [...this.state.repLogs, newItem]});
     }
 
     render() {

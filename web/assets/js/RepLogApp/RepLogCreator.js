@@ -6,14 +6,18 @@ export default class RepLogCreator extends Component {
         super(props);
 
         this._handleFormSubmit = this._handleFormSubmit.bind(this);
+        this.quantityInput = React.createRef();
+        this.itemSelect = React.createRef();
     }
 
     _handleFormSubmit(event) {
         event.preventDefault();
 
-        const { newItemSubmitHandler } = this.props;
-        const itemName = event.target.elements.namedItem('rep_log_item').value;
-        const reps = event.target.elements.namedItem('rep_log_reps').value;
+        const {newItemSubmitHandler} = this.props;
+        const quantityInput = this.quantityInput.current;
+        const itemSelect = this.itemSelect.current;
+        const reps = quantityInput.value;
+        const itemName = itemSelect.options[itemSelect.selectedIndex].text;
 
         newItemSubmitHandler(itemName, reps);
     }
@@ -32,7 +36,7 @@ export default class RepLogCreator extends Component {
                         What did you lift?
                     </label>
                     <select id="rep_log_item"
-                            name="item"
+                            ref={this.itemSelect}
                             required="required"
                             className="form-control"
                             defaultValue={""}
@@ -49,10 +53,13 @@ export default class RepLogCreator extends Component {
                     <label className="sr-only control-label required" htmlFor="rep_log_reps">
                         How many times?
                     </label>
-                    <input type="number" id="rep_log_reps"
-                           name="reps" required="required"
+                    <input type="number"
+                           id="rep_log_reps"
+                           ref={this.quantityInput}
+                           required="required"
                            placeholder="How many times?"
-                           className="form-control" />
+                           className="form-control"
+                    />
                 </div>
 
                 <button type="submit" className="btn btn-primary">I Lifted it!</button>
