@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const repLogs = [
-    {id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
-    {id: 2, reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
-    {id: 8, reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
-];
-
 export default function RepLogList(props) {
-    const {highlightedRowId, rowClickedHandler} = props;
+    const {highlightedRowId, rowClickedHandler, repLogs} = props;
 
     return (
         <table className="table table-striped">
@@ -51,4 +45,5 @@ export default function RepLogList(props) {
 RepLogList.propTypes = {
     highlightedRowId: PropTypes.any,
     rowClickedHandler: PropTypes.func.isRequired,
+    repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

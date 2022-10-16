@@ -3,7 +3,7 @@ import RepLogList from "./RepLogList";
 import PropTypes from "prop-types";
 
 export default function RepLogs(props) {
-    const {withHeart, highlightedRowId, rowClickedHandler} = props;
+    const {withHeart, highlightedRowId, rowClickedHandler, repLogs} = props;
 
     return (
         <div className="col-md-7 js-rep-log-table">
@@ -16,6 +16,7 @@ export default function RepLogs(props) {
             <RepLogList
                 highlightedRowId={highlightedRowId}
                 rowClickedHandler={rowClickedHandler}
+                repLogs={repLogs}
             />
 
             <form className="form-inline" style={{display: "flex", justifyContent: "space-between"}}>
@@ -58,4 +59,5 @@ RepLogs.propTypes = {
     withHeart: PropTypes.bool,
     highlightedRowId: PropTypes.any,
     rowClickedHandler: PropTypes.func.isRequired,
+    repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

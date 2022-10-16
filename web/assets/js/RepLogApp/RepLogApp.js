@@ -7,6 +7,11 @@ export default class RepLogApp extends Component {
         super(props);
         this.state = {
             highlightedRowId: null,
+            repLogs: [
+                {id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
+                {id: 2, reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
+                {id: 8, reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
+            ]
         };
     }
 
@@ -18,12 +23,13 @@ export default class RepLogApp extends Component {
 
     render() {
         const {withHeart} = this.props;
-        const {highlightedRowId} = this.state;
+        const {highlightedRowId, repLogs} = this.state;
 
         return (
             <RepLogs
                 withHeart={withHeart}
                 highlightedRowId={highlightedRowId}
+                repLogs={repLogs}
                 rowClickedHandler={this._handleRowClick.bind(this)}
             />
         );
