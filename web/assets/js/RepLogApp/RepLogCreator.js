@@ -8,6 +8,13 @@ export default class RepLogCreator extends Component {
         this._handleFormSubmit = this._handleFormSubmit.bind(this);
         this.quantityInput = React.createRef();
         this.itemSelect = React.createRef();
+
+        this.itemOptions = [
+            {id: 'cat', text: 'Cat'},
+            {id: 'fat_cat', text: 'Big Fat Cat'},
+            {id: 'laptop', text: 'My Laptop'},
+            {id: 'coffee_cup', text: 'Coffee Cup'},
+        ];
     }
 
     _handleFormSubmit(event) {
@@ -43,12 +50,19 @@ export default class RepLogCreator extends Component {
                             required="required"
                             className="form-control"
                             defaultValue={""}
+
                     >
                         <option value="">What did you lift?</option>
-                        <option value="cat">Cat</option>
-                        <option value="fat_cat">Big Fat Cat</option>
-                        <option value="laptop">My Laptop</option>
-                        <option value="coffee_cup">Coffee Cup</option>
+                        {this.itemOptions.map(option => {
+                            return (
+                                <option
+                                    key={option.id}
+                                    value={option.id}
+                                >
+                                    {option.text}
+                                </option>
+                            );
+                        })}
                     </select>
                 </div>
 
