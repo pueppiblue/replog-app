@@ -5,6 +5,10 @@ export default class RepLogCreator extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            quantityInputError: '',
+        };
+
         this._handleFormSubmit = this._handleFormSubmit.bind(this);
         this.quantityInput = React.createRef();
         this.itemSelect = React.createRef();
@@ -17,6 +21,12 @@ export default class RepLogCreator extends Component {
         ];
     }
 
+    _isQuantiyValid(quantity) {
+        this.setState({quantityInputError: quantity <= 0 ? 'Please enter a value greater than 0' : ''});
+
+        return quantity > 0;
+    }
+
     _handleFormSubmit(event) {
         event.preventDefault();
 
@@ -25,6 +35,9 @@ export default class RepLogCreator extends Component {
         const itemSelect = this.itemSelect.current;
         const reps = quantityInput.value;
         const itemName = itemSelect.options[itemSelect.selectedIndex].text;
+        if (!this._isQuantiyValid(reps)) {
+            return;
+        }
 
         repLogAddHandler(itemName, reps);
 
@@ -34,6 +47,7 @@ export default class RepLogCreator extends Component {
 
 
     render() {
+        const {quantityInputError} = this.state;
 
         return (
             <form
@@ -66,7 +80,7 @@ export default class RepLogCreator extends Component {
                     </select>
                 </div>
 
-                <div className="form-group">
+                <div className={`form-group ${quantityInputError ? 'has-error' : ''}`}>
                     <label className="sr-only control-label required" htmlFor="rep_log_reps">
                         How many times?
                     </label>
@@ -77,6 +91,7 @@ export default class RepLogCreator extends Component {
                            placeholder="How many times?"
                            className="form-control"
                     />
+                    {quantityInputError && <span className="help-block">{quantityInputError}</span>}
                 </div>
 
                 <button type="submit" className="btn btn-primary">I Lifted it!</button>
