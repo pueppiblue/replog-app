@@ -9,14 +9,21 @@ export default function RepLogs(props) {
         highlightedRowId,
         rowClickedHandler,
         repLogAddHandler,
-        repLogs
+        heartCountHandler,
+        repLogs,
+        numberOfHearts
     } = props;
 
     return (
         <div className="col-md-7 js-rep-log-table">
+            <input
+                type="range"
+                value={numberOfHearts}
+                onChange={(e) => heartCountHandler(parseInt(e.target.value) || 0)}
+            />
             <h2>
                 Lift History
-                {withHeart ? <span>❤️</span> : ''}
+                {withHeart ? <span>{'❤️'.repeat(numberOfHearts)}</span> : ''}
                 !
             </h2>
 
@@ -38,5 +45,7 @@ RepLogs.propTypes = {
     highlightedRowId: PropTypes.any,
     rowClickedHandler: PropTypes.func.isRequired,
     repLogAddHandler: PropTypes.func.isRequired,
+    heartCountHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
+    numberOfHearts: PropTypes.number.isRequired,
 }

@@ -6,13 +6,17 @@ import {v4 as uuid} from 'uuid';
 export default class RepLogApp extends Component {
     constructor(props) {
         super(props);
+        this._handleRowClick = this._handleRowClick.bind(this);
+        this._handleAddReplog = this._handleAddReplog.bind(this);
+
         this.state = {
             highlightedRowId: null,
             repLogs: [
                 {id: uuid(), reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
                 {id: uuid(), reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
                 {id: uuid(), reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
-            ]
+            ],
+            numberOfHearts: 0,
         };
     }
 
@@ -33,13 +37,19 @@ export default class RepLogApp extends Component {
         this.setState(previousState => ({repLogs: [...previousState.repLogs, newItem]}));
     }
 
+    _handleHeartCount = (heartCount) => {
+        this.setState({numberOfHearts: heartCount});
+    };
+
+
     render() {
         return (
             <RepLogs
                 {...this.props}
                 {...this.state}
-                rowClickedHandler={this._handleRowClick.bind(this)}
-                repLogAddHandler={this._handleAddReplog.bind(this)}
+                rowClickedHandler={this._handleRowClick}
+                repLogAddHandler={this._handleAddReplog}
+                heartCountHandler={this._handleHeartCount}
             />
         );
     }

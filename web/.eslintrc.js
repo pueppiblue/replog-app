@@ -4,7 +4,7 @@ module.exports = {
         'plugin:react/recommended',
     ],
     parserOptions: {
-        ecmaVersion: 6,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: {
             jsx: true
@@ -18,5 +18,13 @@ module.exports = {
     rules: {
         "no-console": 0,
         "no-unused-vars": 0
+    },
+    plugins: [
+        "react"
+    ],
+    settings: {
+        react: {
+            version: "detect",
+        },
     }
 };
