@@ -30,7 +30,7 @@ export default class RepLogApp extends Component {
             totalWeightLifted: Math.floor(Math.random() * 50)
         };
 
-        this.setState({repLogs: [...this.state.repLogs, newItem]});
+        this.setState(previousState => ({repLogs: [...previousState.repLogs, newItem]}));
     }
 
     render() {
