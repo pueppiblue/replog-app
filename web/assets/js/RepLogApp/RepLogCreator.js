@@ -13,13 +13,13 @@ export default class RepLogCreator extends Component {
     _handleFormSubmit(event) {
         event.preventDefault();
 
-        const {newItemSubmitHandler} = this.props;
+        const {repLogAddHandler} = this.props;
         const quantityInput = this.quantityInput.current;
         const itemSelect = this.itemSelect.current;
         const reps = quantityInput.value;
         const itemName = itemSelect.options[itemSelect.selectedIndex].text;
 
-        newItemSubmitHandler(itemName, reps);
+        repLogAddHandler(itemName, reps);
 
         quantityInput.value = '';
         itemSelect.selectedIndex = 0;
@@ -72,5 +72,5 @@ export default class RepLogCreator extends Component {
 }
 
 RepLogCreator.propTypes = {
-    newItemSubmitHandler: PropTypes.func.isRequired,
+    repLogAddHandler: PropTypes.func.isRequired,
 }

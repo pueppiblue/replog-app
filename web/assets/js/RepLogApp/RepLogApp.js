@@ -22,7 +22,7 @@ export default class RepLogApp extends Component {
         });
     }
 
-    _handleNewItemSubmit(itemName, reps) {
+    _handleAddReplog(itemName, reps) {
         const newItem = {
             id: uuid(),
             reps: parseFloat(reps),
@@ -39,7 +39,7 @@ export default class RepLogApp extends Component {
                 {...this.props}
                 {...this.state}
                 rowClickedHandler={this._handleRowClick.bind(this)}
-                newItemSubmitHandler={this._handleNewItemSubmit.bind(this)}
+                repLogAddHandler={this._handleAddReplog.bind(this)}
             />
         );
     }
