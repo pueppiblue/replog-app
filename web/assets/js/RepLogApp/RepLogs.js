@@ -1,6 +1,5 @@
 import React from 'react';
 import RepLogList from "./RepLogList";
-// import RepLogCreator from "./RepLogCreator";
 import RepLogCreator from "./RepLogCreatorControlledComponent";
 import PropTypes from "prop-types";
 
@@ -10,6 +9,7 @@ export default function RepLogs(props) {
         highlightedRowId,
         rowClickedHandler,
         repLogAddHandler,
+        repLogDeleteHandler,
         heartCountHandler,
         repLogs,
         numberOfHearts
@@ -32,6 +32,7 @@ export default function RepLogs(props) {
                 highlightedRowId={highlightedRowId}
                 rowClickedHandler={rowClickedHandler}
                 repLogs={repLogs}
+                repLogDeleteHandler={repLogDeleteHandler}
             />
 
             <RepLogCreator
@@ -46,6 +47,7 @@ RepLogs.propTypes = {
     highlightedRowId: PropTypes.any,
     rowClickedHandler: PropTypes.func.isRequired,
     repLogAddHandler: PropTypes.func.isRequired,
+    repLogDeleteHandler: PropTypes.func.isRequired,
     heartCountHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
     numberOfHearts: PropTypes.number.isRequired,

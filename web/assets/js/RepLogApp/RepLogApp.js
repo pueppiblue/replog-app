@@ -37,6 +37,14 @@ export default class RepLogApp extends Component {
         this.setState(previousState => ({repLogs: [...previousState.repLogs, newItem]}));
     }
 
+    _handleDeleteReplog = (repLogId) => {
+        this.setState(prevState => (
+            {
+                repLogs: prevState.repLogs.filter(repLog => repLog.id !== repLogId)
+            }
+        ));
+    }
+
     _handleHeartCount = (heartCount) => {
         this.setState({numberOfHearts: heartCount});
     };
@@ -50,6 +58,7 @@ export default class RepLogApp extends Component {
                 rowClickedHandler={this._handleRowClick}
                 repLogAddHandler={this._handleAddReplog}
                 heartCountHandler={this._handleHeartCount}
+                repLogDeleteHandler={this._handleDeleteReplog}
             />
         );
     }

@@ -12,7 +12,18 @@ const calculateTotalWeight = replogs => replogs.reduce(
 )
 
 export default function RepLogList(props) {
-    const {highlightedRowId, rowClickedHandler, repLogs} = props;
+    const {
+        highlightedRowId,
+        rowClickedHandler,
+        repLogs,
+        repLogDeleteHandler
+    } = props;
+
+    const _handleDeleteClick = function (event, repLogId) {
+        event.preventDefault();
+
+        repLogDeleteHandler(repLogId);
+    }
 
     return (
         <table className="table table-striped">
@@ -36,7 +47,14 @@ export default function RepLogList(props) {
                             <td>{replog.itemLabel}</td>
                             <td>{replog.reps}</td>
                             <td>{replog.totalWeightLifted}</td>
-                            <td>...</td>
+                            <td>
+                                <a href="#">
+                                    <span
+                                        className="fa fa-trash"
+                                        onClick={(event) => _handleDeleteClick(event, replog.id)}
+                                    />
+                                </a>
+                            </td>
                         </tr>
                     ))
             }
@@ -55,5 +73,6 @@ export default function RepLogList(props) {
 RepLogList.propTypes = {
     highlightedRowId: PropTypes.any,
     rowClickedHandler: PropTypes.func.isRequired,
+    repLogDeleteHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
