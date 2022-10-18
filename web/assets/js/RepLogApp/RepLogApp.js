@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import RepLogs from "./RepLogs";
 import PropTypes from "prop-types";
 import {v4 as uuid} from 'uuid';
+import {getRepLogs} from "../api/replog_api";
+
 
 export default class RepLogApp extends Component {
     constructor(props) {
@@ -11,13 +13,15 @@ export default class RepLogApp extends Component {
 
         this.state = {
             highlightedRowId: null,
-            repLogs: [
-                {id: uuid(), reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 112.5},
-                {id: uuid(), reps: 10, itemLabel: 'Big Fat Cat', totalWeightLifted: 180},
-                {id: uuid(), reps: 4, itemLabel: 'Big Fat Cat', totalWeightLifted: 72}
-            ],
+            repLogs: [],
             numberOfHearts: 0,
         };
+    }
+
+    componentDidMount() {
+        getRepLogs().then(data => {
+            this.setState({repLogs: data});
+        });
     }
 
     _handleRowClick(clickedRowId) {
