@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import RepLogs from "./RepLogs";
 import PropTypes from "prop-types";
-import {v4 as uuid} from 'uuid';
-import {getRepLogs, deleteRepLog} from "../api/replog_api";
+import {createRepLog, deleteRepLog, getRepLogs} from "../api/replog_api";
 
 
 export default class RepLogApp extends Component {
@@ -36,15 +35,19 @@ export default class RepLogApp extends Component {
         });
     }
 
-    _handleAddReplog(itemName, reps) {
+    _handleAddReplog(itemKey, reps) {
         const newItem = {
-            id: uuid(),
             reps: parseFloat(reps),
-            itemLabel: itemName,
-            totalWeightLifted: Math.floor(Math.random() * 50)
+            item: itemKey,
         };
 
-        this.setState(previousState => ({repLogs: [...previousState.repLogs, newItem]}));
+        createRepLog(newItem).then((repLog) => {
+            this.setState(previousState => ({
+                repLogs: [...previousState.repLogs, repLog]
+            }));
+        });
+
+
     }
 
     _handleDeleteReplog = (repLogId) => {

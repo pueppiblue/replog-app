@@ -38,13 +38,12 @@ export default class RepLogCreator extends Component {
 
         const {repLogAddHandler} = this.props;
         const {selectedItemId, quantity} = this.state;
-        const itemLabel = this.itemOptions.find(option => option.id === selectedItemId).text;
 
         if (!this._isQuantiyValid(quantity)) {
             return;
         }
 
-        repLogAddHandler(itemLabel, quantity);
+        repLogAddHandler(selectedItemId, quantity);
 
         this.setState({
             quantityValue: 0,
