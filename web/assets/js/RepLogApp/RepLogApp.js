@@ -77,6 +77,14 @@ export default class RepLogApp extends Component {
     }
 
     _handleDeleteReplog = (repLogId) => {
+        this.setState((prevState) => {
+            const replogs = prevState.repLogs.map(
+                replog => replog.id !== repLogId ? replog : Object.assign({}, replog, {isDeleting: true})
+            );
+
+            return {repLogs: replogs};
+        })
+
         deleteRepLog(repLogId).then(() => {
             this.setState(prevState => (
                 {
@@ -84,6 +92,7 @@ export default class RepLogApp extends Component {
                 }
             ));
         });
+        this._showFlashMessage('Item was Un-lifted!');
     }
 
     _handleHeartCount = (heartCount) => {
