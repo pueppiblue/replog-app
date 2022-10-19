@@ -12,7 +12,8 @@ export default function RepLogs(props) {
         repLogDeleteHandler,
         heartCountHandler,
         repLogs,
-        numberOfHearts
+        numberOfHearts,
+        isLoading
     } = props;
 
     return (
@@ -33,6 +34,7 @@ export default function RepLogs(props) {
                 rowClickedHandler={rowClickedHandler}
                 repLogs={repLogs}
                 repLogDeleteHandler={repLogDeleteHandler}
+                isLoading={isLoading}
             />
 
             <RepLogCreator
@@ -51,4 +53,5 @@ RepLogs.propTypes = {
     heartCountHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
     numberOfHearts: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool.isRequired,
 }

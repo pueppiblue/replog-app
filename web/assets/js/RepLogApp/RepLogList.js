@@ -1,24 +1,37 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const calculateTotalReps = replogs => replogs.reduce(
-    (total, replogItem) => total + replogItem.reps,
-    0
-)
-
-const calculateTotalWeight = replogs => replogs.reduce(
-    (total, replogItem) => total + replogItem.totalWeightLifted,
-    0
-)
-
 export default function RepLogList(props) {
     const {
         highlightedRowId,
         rowClickedHandler,
         repLogs,
-        repLogDeleteHandler
+        repLogDeleteHandler,
+        isLoading,
     } = props;
 
+    if (isLoading) {
+        return (
+            <table className="table table-striped">
+                <tbody>
+                <tr>
+                    <td colSpan="4" className="text-center">Loading...</td>
+                </tr>
+                </tbody>
+            </table>
+        );
+    }
+
+    const calculateTotalReps = replogs => replogs.reduce(
+        (total, replogItem) => total + replogItem.reps,
+        0
+    )
+
+    const calculateTotalWeight = replogs => replogs.reduce(
+        (total, replogItem) => total + replogItem.totalWeightLifted,
+        0
+    )
+    
     const _handleDeleteClick = function (event, repLogId) {
         event.preventDefault();
 
@@ -75,4 +88,5 @@ RepLogList.propTypes = {
     rowClickedHandler: PropTypes.func.isRequired,
     repLogDeleteHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isLoading: PropTypes.bool.isRequired,
 }

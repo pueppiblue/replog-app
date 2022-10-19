@@ -15,12 +15,18 @@ export default class RepLogApp extends Component {
             highlightedRowId: null,
             repLogs: [],
             numberOfHearts: 0,
+            isLoading: true,
         };
     }
 
     componentDidMount() {
         getRepLogs().then(data => {
-            this.setState({repLogs: data});
+            setTimeout(() => {
+                this.setState({
+                    repLogs: data,
+                    isLoading: false,
+                });
+            }, 1000);
         });
     }
 
