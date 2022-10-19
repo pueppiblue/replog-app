@@ -9,6 +9,7 @@ export default class RepLogApp extends Component {
         super(props);
         this._handleRowClick = this._handleRowClick.bind(this);
         this._handleAddReplog = this._handleAddReplog.bind(this);
+        this.flashMessageHandle = 0;
 
         this.state = {
             highlightedRowId: null,
@@ -33,6 +34,24 @@ export default class RepLogApp extends Component {
         });
     }
 
+    componentWillUnmount() {
+        // prevents callback if app is not rendered
+        clearTimeout(this.flashMessageHandle);
+    }
+
+    _showFlashMessage(message) {
+        this.setState({
+            flashMessage: message,
+        })
+        clearTimeout(this.flashMessageHandle);
+        this.flashMessageHandle = setTimeout(() => {
+            this.setState({
+                flashMessage: ''
+            });
+        }, 5000)
+
+    }
+
     _handleRowClick(clickedRowId) {
         this.setState({
             highlightedRowId: clickedRowId,
@@ -48,15 +67,13 @@ export default class RepLogApp extends Component {
 
         createRepLog(newItem).then((repLog) => {
             setTimeout(() => {
+                this._showFlashMessage('Replog lifted to database!');
                 this.setState(previousState => ({
                     repLogs: [...previousState.repLogs, repLog],
                     isSavingRepLog: false,
-                    flashMessage: 'Replog lifted to database!'
                 }));
             }, 1000);
         });
-
-
     }
 
     _handleDeleteReplog = (repLogId) => {
