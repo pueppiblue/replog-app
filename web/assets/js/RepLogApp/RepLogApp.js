@@ -14,12 +14,16 @@ export default class RepLogApp extends Component {
             highlightedRowId: null,
             repLogs: [],
             numberOfHearts: 0,
-            isLoading: true,
+            isLoading: false,
+            isSavingRepLog: false,
+            flashMessage: '',
         };
     }
 
     componentDidMount() {
+        this.setState({isLoading: true});
         getRepLogs().then(data => {
+            // timeout for demonstration purpose
             setTimeout(() => {
                 this.setState({
                     repLogs: data,
@@ -36,15 +40,20 @@ export default class RepLogApp extends Component {
     }
 
     _handleAddReplog(itemKey, reps) {
+        this.setState({isSavingRepLog: true});
         const newItem = {
             reps: parseFloat(reps),
             item: itemKey,
         };
 
         createRepLog(newItem).then((repLog) => {
-            this.setState(previousState => ({
-                repLogs: [...previousState.repLogs, repLog]
-            }));
+            setTimeout(() => {
+                this.setState(previousState => ({
+                    repLogs: [...previousState.repLogs, repLog],
+                    isSavingRepLog: false,
+                    flashMessage: 'Replog lifted to database!'
+                }));
+            }, 1000);
         });
 
 

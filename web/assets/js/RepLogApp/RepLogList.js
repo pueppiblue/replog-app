@@ -8,6 +8,7 @@ export default function RepLogList(props) {
         repLogs,
         repLogDeleteHandler,
         isLoading,
+        isSavingRepLog
     } = props;
 
     if (isLoading) {
@@ -31,7 +32,7 @@ export default function RepLogList(props) {
         (total, replogItem) => total + replogItem.totalWeightLifted,
         0
     )
-    
+
     const _handleDeleteClick = function (event, repLogId) {
         event.preventDefault();
 
@@ -71,6 +72,19 @@ export default function RepLogList(props) {
                         </tr>
                     ))
             }
+            {isSavingRepLog && (
+                <tr>
+                    <td
+                        colSpan="4"
+                        className="text-center"
+                        style={{
+                            opacity: 0.5,
+                        }}
+                    >
+                        Lifting to the database ...
+                    </td>
+                </tr>
+            )}
             </tbody>
             <tfoot>
             <tr>
@@ -89,4 +103,5 @@ RepLogList.propTypes = {
     repLogDeleteHandler: PropTypes.func.isRequired,
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
     isLoading: PropTypes.bool.isRequired,
+    isSavingRepLog: PropTypes.bool.isRequired,
 }

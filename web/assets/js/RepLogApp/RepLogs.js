@@ -13,7 +13,9 @@ export default function RepLogs(props) {
         heartCountHandler,
         repLogs,
         numberOfHearts,
-        isLoading
+        isLoading,
+        isSavingRepLog,
+        flashMessage
     } = props;
 
     return (
@@ -23,6 +25,13 @@ export default function RepLogs(props) {
                 value={numberOfHearts}
                 onChange={(e) => heartCountHandler(parseInt(e.target.value) || 0)}
             />
+
+            {flashMessage && (
+                <div className="alert alert-success text-center">
+                    {flashMessage}
+                </div>
+            )}
+
             <h2>
                 Lift History
                 {withHeart ? <span>{'❤️'.repeat(numberOfHearts)}</span> : ''}
@@ -35,6 +44,7 @@ export default function RepLogs(props) {
                 repLogs={repLogs}
                 repLogDeleteHandler={repLogDeleteHandler}
                 isLoading={isLoading}
+                isSavingRepLog={isSavingRepLog}
             />
 
             <RepLogCreator
@@ -54,4 +64,6 @@ RepLogs.propTypes = {
     repLogs: PropTypes.arrayOf(PropTypes.object).isRequired,
     numberOfHearts: PropTypes.number.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    isSavingRepLog: PropTypes.bool.isRequired,
+    flashMessage: PropTypes.string.isRequired,
 }

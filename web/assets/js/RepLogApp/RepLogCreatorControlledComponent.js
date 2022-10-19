@@ -7,7 +7,7 @@ export default class RepLogCreator extends Component {
 
         this.state = {
             quantityInputError: '',
-            quantity: 0,
+            quantity: '',
             selectedItemId: '',
         };
 
