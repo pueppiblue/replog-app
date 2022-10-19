@@ -16,6 +16,7 @@ export default class RepLogCreator extends Component {
             {id: 'fat_cat', text: 'Big Fat Cat'},
             {id: 'laptop', text: 'My Laptop'},
             {id: 'coffee_cup', text: 'Coffee Cup'},
+            {id: 'invalid_item', text: 'Dark Matter'}
         ];
     }
 
@@ -23,6 +24,21 @@ export default class RepLogCreator extends Component {
         this.setState({quantityInputError: quantity <= 0 ? 'Please enter a value greater than 0' : ''});
 
         return quantity > 0;
+    }
+
+    validationErrorMessage() {
+        const {validationErrors} = this.props;
+
+        return Object.entries(validationErrors).map((error) => {
+            return (
+                <div
+                    className="alert alert-danger"
+                    key={error[0]}
+                >
+                    {error[0] + ": " + error[1]}
+                </div>
+            );
+        });
     }
 
     handleQuantityChange = (event) => {
@@ -54,59 +70,67 @@ export default class RepLogCreator extends Component {
 
     render() {
         const {quantityInputError, quantity, selectedItemId} = this.state;
+        const {validationErrors} = this.props;
 
         return (
-            <form
-                className="form-inline"
-                style={{display: "flex", justifyContent: "space-between"}}
-                onSubmit={this._handleFormSubmit}
-            >
-                <div className="form-group">
-                    <label className="sr-only control-label required" htmlFor="rep_log_item">
-                        What did you lift?
-                    </label>
-                    <select id="rep_log_item"
-                            value={selectedItemId}
-                            onChange={this.handleSelectedItemChange}
+            <div>
+                {validationErrors &&
+                    this.validationErrorMessage()
+                }
+                <form
+                    className="form-inline"
+                    style={{display: "flex", justifyContent: "space-between"}}
+                    onSubmit={this._handleFormSubmit}
+                >
+                    <div className="form-group">
+                        <label className="sr-only control-label required" htmlFor="rep_log_item">
+                            What did you lift?
+                        </label>
+                        <select id="rep_log_item"
+                                value={selectedItemId}
+                                onChange={this.handleSelectedItemChange}
+                                required="required"
+                                className="form-control"
+                        >
+                            <option value="">What did you lift?</option>
+                            {this.itemOptions.map(option => {
+                                return (
+                                    <option
+                                        key={option.id}
+                                        value={option.id}
+                                    >
+                                        {option.text}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+
+                    <div className={`form-group ${quantityInputError ? 'has-error' : ''}`}>
+                        <label className="sr-only control-label required" htmlFor="rep_log_reps">
+                            How many times?
+                        </label>
+                        <input
+                            type="number"
+                            id="rep_log_reps"
+                            value={quantity}
+                            onChange={this.handleQuantityChange}
                             required="required"
+                            placeholder="How many times?"
                             className="form-control"
-                    >
-                        <option value="">What did you lift?</option>
-                        {this.itemOptions.map(option => {
-                            return (
-                                <option
-                                    key={option.id}
-                                    value={option.id}
-                                >
-                                    {option.text}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </div>
+                        />
+                        {quantityInputError && <span className="help-block">{quantityInputError}</span>}
+                    </div>
 
-                <div className={`form-group ${quantityInputError ? 'has-error' : ''}`}>
-                    <label className="sr-only control-label required" htmlFor="rep_log_reps">
-                        How many times?
-                    </label>
-                    <input
-                        type="number"
-                        id="rep_log_reps"
-                        value={quantity}
-                        onChange={this.handleQuantityChange}
-                        required="required"
-                        placeholder="How many times?"
-                        className="form-control"
-                    />
-                    {quantityInputError && <span className="help-block">{quantityInputError}</span>}
-                </div>
-
-                <button type="submit" className="btn btn-primary">I Lifted it!</button>
-            </form>
-        );
+                    <button type="submit" className="btn btn-primary">I Lifted it!</button>
+                </form>
+            </div>
+        )
+            ;
     }
 }
 
 RepLogCreator.propTypes = {
     repLogAddHandler: PropTypes.func.isRequired,
+    validationErrors: PropTypes.object
 }

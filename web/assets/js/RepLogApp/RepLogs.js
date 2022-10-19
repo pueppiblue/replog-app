@@ -15,7 +15,8 @@ export default function RepLogs(props) {
         numberOfHearts,
         isLoading,
         isSavingRepLog,
-        flashMessage
+        flashMessage,
+        validationErrors
     } = props;
 
     return (
@@ -49,6 +50,7 @@ export default function RepLogs(props) {
 
             <RepLogCreator
                 repLogAddHandler={repLogAddHandler}
+                validationErrors={validationErrors}
             />
         </div>
     );
@@ -66,4 +68,5 @@ RepLogs.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     isSavingRepLog: PropTypes.bool.isRequired,
     flashMessage: PropTypes.string.isRequired,
+    validationErrors: PropTypes.object,
 }

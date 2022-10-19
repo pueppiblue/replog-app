@@ -18,19 +18,17 @@ export default class RepLogApp extends Component {
             isLoading: false,
             isSavingRepLog: false,
             flashMessage: '',
+            validationErrors: null,
         };
     }
 
     componentDidMount() {
         this.setState({isLoading: true});
         getRepLogs().then(data => {
-            // timeout for demonstration purpose
-            setTimeout(() => {
-                this.setState({
-                    repLogs: data,
-                    isLoading: false,
-                });
-            }, 1000);
+            this.setState({
+                repLogs: data,
+                isLoading: false,
+            });
         });
     }
 
@@ -65,15 +63,22 @@ export default class RepLogApp extends Component {
             item: itemKey,
         };
 
-        createRepLog(newItem).then((repLog) => {
-            setTimeout(() => {
+        createRepLog(newItem)
+            .then((repLog) => {
                 this._showFlashMessage('Replog lifted to database!');
                 this.setState(previousState => ({
                     repLogs: [...previousState.repLogs, repLog],
                     isSavingRepLog: false,
+                    validationErrors: null,
                 }));
-            }, 1000);
-        });
+            })
+            .catch(error => {
+                error.response.json().then(data => {
+                    this.setState({
+                        validationErrors: data.errors
+                    });
+                })
+            });
     }
 
     _handleDeleteReplog = (repLogId) => {
