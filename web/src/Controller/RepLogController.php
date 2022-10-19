@@ -38,7 +38,7 @@ class RepLogController extends BaseController
     }
 
     /**
-     * @Route("/reps/{id}", name="rep_log_delete", methods={"GET"})
+     * @Route("/reps/{id}", name="rep_log_delete", methods={"DELETE"})
      */
     public function deleteRepLogAction(RepLog $repLog)
     {

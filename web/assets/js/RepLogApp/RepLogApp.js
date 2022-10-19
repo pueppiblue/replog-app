@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import RepLogs from "./RepLogs";
 import PropTypes from "prop-types";
 import {v4 as uuid} from 'uuid';
-import {getRepLogs} from "../api/replog_api";
+import {getRepLogs, deleteRepLog} from "../api/replog_api";
 
 
 export default class RepLogApp extends Component {
@@ -48,11 +48,13 @@ export default class RepLogApp extends Component {
     }
 
     _handleDeleteReplog = (repLogId) => {
-        this.setState(prevState => (
-            {
-                repLogs: prevState.repLogs.filter(repLog => repLog.id !== repLogId)
-            }
-        ));
+        deleteRepLog(repLogId).then(() => {
+            this.setState(prevState => (
+                {
+                    repLogs: prevState.repLogs.filter(repLog => repLog.id !== repLogId)
+                }
+            ));
+        });
     }
 
     _handleHeartCount = (heartCount) => {

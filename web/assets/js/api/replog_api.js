@@ -1,5 +1,14 @@
-export async function getRepLogs() {
-    const response = await fetch('/reps', {method: 'GET'});
+async function fetchJson(url, options) {
+    const response = await fetch(url, options);
 
-    return response.json().then(data => data.items);
+    return await response.text().then(text => text ? JSON.parse(text) : '');
+}
+
+
+export function getRepLogs() {
+    return fetchJson('/reps', {method: 'GET'}).then(data => data.items);
+}
+
+export function deleteRepLog(repLogId) {
+    return fetchJson(`/reps/${repLogId}`, {method: 'DELETE'});
 }

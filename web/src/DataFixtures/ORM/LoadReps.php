@@ -47,7 +47,7 @@ class LoadReps extends Fixture
             $user->setEnabled(true);
             $manager->persist($user);
 
-            for ($j = 0; $j < rand(1, 5); $j++) {
+            for ($j = 0; $j < rand(2, 6); $j++) {
                 $repLog = new RepLog();
                 $repLog->setUser($user);
                 $repLog->setReps(rand(1, 30));
