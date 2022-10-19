@@ -46,7 +46,7 @@ export default class RepLogCreator extends Component {
         repLogAddHandler(selectedItemId, quantity);
 
         this.setState({
-            quantityValue: 0,
+            quantity: '',
             selectedItemId: '',
         });
     }
