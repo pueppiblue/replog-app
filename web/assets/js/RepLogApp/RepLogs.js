@@ -21,7 +21,7 @@ export default function RepLogs(props) {
     } = props;
 
     return (
-        <div className="col-md-7 js-rep-log-table">
+        <div className="js-rep-log-table">
             <input
                 type="range"
                 value={numberOfHearts}
