@@ -1,4 +1,11 @@
 async function fetchJson(url, options) {
+    const jsonHeader = {'Content-Type': 'application/json'};
+
+    options.headers = {
+        ...options.headers,
+        ...jsonHeader
+    }
+
     const response = await fetch(url, options);
 
     if (response.ok) {
@@ -23,7 +30,7 @@ export function createRepLog(repLog) {
     return fetchJson(`/reps`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'MyCustomHeader': 'pimp my headers',
         },
         body: JSON.stringify(repLog),
     });
