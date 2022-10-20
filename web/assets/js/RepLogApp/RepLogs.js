@@ -16,7 +16,8 @@ export default function RepLogs(props) {
         isLoading,
         isSavingRepLog,
         flashMessage,
-        validationErrors
+        validationErrors,
+        itemOptions
     } = props;
 
     return (
@@ -51,6 +52,7 @@ export default function RepLogs(props) {
             <RepLogCreator
                 repLogAddHandler={repLogAddHandler}
                 validationErrors={validationErrors}
+                itemOptions={itemOptions}
             />
         </div>
     );
@@ -69,4 +71,5 @@ RepLogs.propTypes = {
     isSavingRepLog: PropTypes.bool.isRequired,
     flashMessage: PropTypes.string.isRequired,
     validationErrors: PropTypes.object,
+    itemOptions: PropTypes.array.isRequired,
 }

@@ -10,14 +10,6 @@ export default class RepLogCreator extends Component {
             quantity: '',
             selectedItemId: '',
         };
-
-        this.itemOptions = [
-            {id: 'cat', text: 'Cat'},
-            {id: 'fat_cat', text: 'Big Fat Cat'},
-            {id: 'laptop', text: 'My Laptop'},
-            {id: 'coffee_cup', text: 'Coffee Cup'},
-            {id: 'invalid_item', text: 'Dark Matter'}
-        ];
     }
 
     _isQuantiyValid(quantity) {
@@ -70,7 +62,7 @@ export default class RepLogCreator extends Component {
 
     render() {
         const {quantityInputError, quantity, selectedItemId} = this.state;
-        const {validationErrors} = this.props;
+        const {validationErrors, itemOptions} = this.props;
 
         return (
             <div>
@@ -93,7 +85,7 @@ export default class RepLogCreator extends Component {
                                 className="form-control"
                         >
                             <option value="">What did you lift?</option>
-                            {this.itemOptions.map(option => {
+                            {itemOptions.map(option => {
                                 return (
                                     <option
                                         key={option.id}
@@ -132,5 +124,6 @@ export default class RepLogCreator extends Component {
 
 RepLogCreator.propTypes = {
     repLogAddHandler: PropTypes.func.isRequired,
-    validationErrors: PropTypes.object
+    validationErrors: PropTypes.object,
+    itemOptions: PropTypes.array.isRequired,
 }
