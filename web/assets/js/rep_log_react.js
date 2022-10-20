@@ -7,9 +7,9 @@ const root = createRoot(container);
 
 const showHeart = true;
 
-
 root.render(
     <RepLogApp
         withHeart={showHeart}
+        {...window.REP_LOG_APP_PROPS}
     />
 );
