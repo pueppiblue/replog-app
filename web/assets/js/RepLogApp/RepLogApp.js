@@ -57,6 +57,7 @@ export default class RepLogApp extends Component {
     }
 
     _handleAddReplog(itemKey, reps) {
+        const savingCompleteState = {isSavingRepLog: false};
         this.setState({isSavingRepLog: true});
         const newItem = {
             reps: parseFloat(reps),
@@ -68,14 +69,15 @@ export default class RepLogApp extends Component {
                 this._showFlashMessage('Replog lifted to database!');
                 this.setState(previousState => ({
                     repLogs: [...previousState.repLogs, repLog],
-                    isSavingRepLog: false,
+                    ...savingCompleteState,
                     validationErrors: null,
                 }));
             })
             .catch(error => {
                 error.response.json().then(data => {
                     this.setState({
-                        validationErrors: data.errors
+                        validationErrors: data.errors,
+                        ...savingCompleteState
                     });
                 })
             });
@@ -84,7 +86,7 @@ export default class RepLogApp extends Component {
     _handleDeleteReplog = (repLogId) => {
         this.setState((prevState) => {
             const replogs = prevState.repLogs.map(
-                replog => replog.id !== repLogId ? replog : Object.assign({}, replog, {isDeleting: true})
+                replog => replog.id !== repLogId ? replog : {...replog, isDeleting: true}
             );
 
             return {repLogs: replogs};
